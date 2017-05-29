@@ -36,9 +36,4 @@ public class UpdatePasswordTest {
     public void updatingPassword(){
 
     }
-
-    @Override
-    public String toString(){
-        return  "test";
-    }
 }
