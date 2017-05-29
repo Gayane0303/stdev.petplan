@@ -29,8 +29,8 @@ public class UpdatePasswordTest {
     }
     @AfterMethod
     private   void afterTest(){
-        webDriver.quit();
         webDriver.close();
+        webDriver.quit();
     }
     @Test()
     public void updatingPassword(){
