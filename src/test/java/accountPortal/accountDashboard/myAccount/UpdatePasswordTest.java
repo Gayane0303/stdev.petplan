@@ -34,5 +34,11 @@ public class UpdatePasswordTest {
     }
     @Test()
     public void updatingPassword(){
+
+    }
+
+    @Override
+    public String toString(){
+        return  "test";
     }
 }
