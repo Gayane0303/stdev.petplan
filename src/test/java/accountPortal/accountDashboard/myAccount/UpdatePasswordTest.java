@@ -23,6 +23,13 @@ public class UpdatePasswordTest {
     private Wait wait;
     private Xpaths xpaths;
 
+    private void NavigateAccountArea() throws InterruptedException {
+        account.accountArea();
+        Thread.sleep(2000);
+        String currentUrl1 = webDriver.getCurrentUrl();
+        assertEquals("http://dev.account.gopetplan.com/#/MyAccount", currentUrl1);
+    }
+
     @BeforeMethod
     private  void beforeTest(){
         wait = new Wait();
@@ -36,13 +43,10 @@ public class UpdatePasswordTest {
 
     @Test()
     public void UpdatingPasswordWithWrongOldPassword() throws InterruptedException {
-        Thread.sleep(4000);
-        String currentUrl = webDriver.getCurrentUrl();
-        assertEquals("http://dev.account.gopetplan.com/#/Dashboard", currentUrl);
-        account.accountArea();
         Thread.sleep(2000);
-        String currentUrl1 = webDriver.getCurrentUrl();
-        assertEquals("http://dev.account.gopetplan.com/#/MyAccount", currentUrl1);
+        String currentUrl = webDriver.getCurrentUrl();
+        assertEquals("http://dev.account.gopetplan.com/#/Login", currentUrl);
+        NavigateAccountArea();
         account.setOldPassword("asdfghjk");
         account.setNewPassword("password123");
         account.confirmPassword("password123");
@@ -52,10 +56,7 @@ public class UpdatePasswordTest {
 
     @Test()
     public void EmptyConfirmPasswordField() throws InterruptedException {
-        account.accountArea();
-        Thread.sleep(2000);
-        String currentUrl1 = webDriver.getCurrentUrl();
-        assertEquals("http://dev.account.gopetplan.com/#/MyAccount", currentUrl1);
+        NavigateAccountArea();
         account.updatePassword();
         account.warningMessegeConfirm();
         account.warningMessegeNew();
@@ -68,6 +69,20 @@ public class UpdatePasswordTest {
         account.updatePassword();
         account.warningMessegeConfirm();
     }
+
+    @Test()
+    public void  NotMatchingPassword() throws InterruptedException {
+        NavigateAccountArea();
+        account.setOldPassword("password123");
+        account.setNewPassword("hello");
+        account.confirmPassword("asdasdadad");
+        account.noMatchConfirm();
+        account.updatePassword();
+        account.noMatchConfirm();
+    }
+
+
+
     @AfterMethod
     private   void afterTest(){
         webDriver.close();

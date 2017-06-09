@@ -41,35 +41,34 @@ public class MyAccountPageOject extends PageObject {
         accountarea.click();
     }
 
-
     @FindBy(xpath = "//p[text()='Wrong password, please try again.']")private WebElement warningmessege;
     public void warningMessege() {
         warningmessege.isDisplayed();
     }
+
     @FindBy(xpath = "//p[text()='Please enter your old password.']")private WebElement warningmessegeold;
     public void warningMessegeOld() {
         warningmessegeold.isDisplayed();
     }
+
     @FindBy(xpath = "//p[text()='Please enter your new password.']")private WebElement warningmessegenew;
-    public void warningMessegeNew() {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        warningmessegenew.isDisplayed();
+    public void warningMessegeNew() { warningmessegenew.isDisplayed();
     }
+
     @FindBy(xpath = "//p[text()='Please confirm your new password.']")private WebElement warningmessegeconfirm;
     public void warningMessegeConfirm() {
         warningmessegeconfirm.isDisplayed();
     }
-
 
     @FindBy(xpath = "//button[contains(text(),   'update password')]")private WebElement updatepassword;
     public void updatePassword() {
         updatepassword.click();
     }
 
+    @FindBy(xpath = "//p[text()='New password and confirm password do not match.']")private WebElement nomatchconfirm;
+    public void noMatchConfirm() {
+        nomatchconfirm.isDisplayed();
+    }
 
 
 }
