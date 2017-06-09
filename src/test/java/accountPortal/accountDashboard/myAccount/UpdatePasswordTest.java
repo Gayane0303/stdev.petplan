@@ -48,9 +48,26 @@ public class UpdatePasswordTest {
         account.confirmPassword("password123");
         account.updatePassword();
         account.warningMessege();
-
     }
 
+    @Test()
+    public void EmptyConfirmPasswordField() throws InterruptedException {
+        account.accountArea();
+        Thread.sleep(2000);
+        String currentUrl1 = webDriver.getCurrentUrl();
+        assertEquals("http://dev.account.gopetplan.com/#/MyAccount", currentUrl1);
+        account.updatePassword();
+        account.warningMessegeConfirm();
+        account.warningMessegeNew();
+        account.warningMessegeOld();
+        account.setOldPassword("password123");
+        account.updatePassword();
+        account.warningMessegeConfirm();
+        account.warningMessegeNew();
+        account.setNewPassword("asdasdasd");
+        account.updatePassword();
+        account.warningMessegeConfirm();
+    }
     @AfterMethod
     private   void afterTest(){
         webDriver.close();
